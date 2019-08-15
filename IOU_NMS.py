@@ -1,12 +1,10 @@
 def iou(box1, box2):
-    ''' Implement the Intersection over Union (IoU) between box1 and box2.
-
-    :param
-    box1 -- (x1, y1, x2, y2) tuple or list
-    box2 -- (x1, y1, x2, y2) tuple or list
-
-    :return
-    iou -- floating point value, Intersection over Union (iou) of box1 and box2
+    ''' Implement the Intersection over union between box1 and box 2.
+    Arguments:
+    box1 -- (x1, y1, x2, y2), top left and bottom right coordinates of the first box
+    box2 -- (x1, y1, x2, y2), top left and bottom right coordinates of the second box
+    Returns:
+    Intersection over Union (iou) of box1 and box2
     '''
 
     # Intersection area
@@ -14,17 +12,23 @@ def iou(box1, box2):
     yi1 = max(box1[1], box2[1])
     xi2 = min(box1[2], box2[2])
     yi2 = min(box1[3], box2[3])
-    intersection_area = (yi2 - yi1) * (xi2 - xi1)
+    if box2[0] > box1[2] or box2[1] > box1[3]:
+        return 0
+    else:
+        intersection_area = max(0, (yi2 - yi1) * (xi2 - xi1))
+        #print(intersection_area)
 
-    # Union area
-    box1_area = (box1[3] - box1[1]) * (box1[2] - box1[0])
-    box2_area = (box2[3] - box2[1]) * (box2[2] - box2[0])
-    union_area = box1_area + box2_area - intersection_area
+        # Union area
+        box1_area = (box1[3] - box1[1]) * (box1[2] - box1[0])
+        box2_area = (box2[3] - box2[1]) * (box2[2] - box2[0])
+        union_area = box1_area + box2_area - intersection_area
 
-    # iou
-    iou_result = intersection_area / float(union_area)
+        # iou
+        if union_area == 0:
+            print('box 1=', box1, 'box 2=', box2)
+        iou = float(intersection_area) / union_area
 
-    return iou_result
+        return iou
 
 
 def non_max_suppression(scores_input, boxes_input, classes_input, iou_threshold = 0.5):
