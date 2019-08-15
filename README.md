@@ -1,5 +1,5 @@
 # Low-level-YOLO-Implementation
-A low-level implementation of functionalities needed in YOLO object detection from scratch in Python.
+A low-level implementation of functionalities needed in YOLO object detection from scratch in Python. (Also, this is related with the second assignment of the course "Convolutional Neural Networks by deeplearning.ai by Prof. Andrew Ng. on Coursera". This is done from scrach in Python.)
 
 YOLO network architecture starts from an input image of size (h=448,w=448,c=3) and it uses a series of convolution (CONV) and pooling (MAX POOL) layers and converge to a final output block of size (7,7,30).
  
